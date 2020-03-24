@@ -1,0 +1,56 @@
+<html>
+  <style type="text/css">
+    button {
+      padding:8px;  
+      background-color: #428bca;  
+      border-color: #357ebd;  
+      color: #fff;  
+      -moz-border-radius: 10px;  
+      -webkit-border-radius: 10px;  
+      border-radius: 10px; /* future proofing */  
+      -khtml-border-radius: 10px; /* for old Konqueror browsers */  
+      text-align: center;  
+      vertical-align: middle;  
+      border: 1px solid transparent;  
+      font-weight: 900;  
+      font-size:125%
+    }  
+  </style>
+  
+  <title>iot_camera</title>
+
+  <body style="text-align: center;">
+
+  <h1>author: 1003425554@qq.com</h1>
+
+  <img id="imgIotCamera" src="http:/120.78.183.26:8000/i0.jpg" width="320" height="240" />
+
+  <div style="margin-top: 8px;">
+    <button id="buttonStart" onclick="onClickStart()">start</button>
+  </div>
+
+  <script>
+    var buttonStartToggle = false;
+    var imgIotCamera = document.getElementById("imgIotCamera");
+    var intervalTimer;
+
+    function onClickStart() {
+      console.log("onClickStart");
+      var buttonStart = document.getElementById("buttonStart");
+      if(! buttonStartToggle) {
+        buttonStartToggle = true;
+        buttonStart.innerText = "stop";
+        intervalTimer = setInterval(function() {
+          console.log('update imgIotCamera')
+          imgIotCamera.src = "http:/120.78.183.26:8000/i0.jpg" + "?" + new Date().getTime();
+        }, 200);
+      } else {
+        buttonStartToggle = false;
+        clearInterval(intervalTimer);
+        buttonStart.innerText = "start";
+      }
+    }
+  </script>
+
+  </body>
+</html>
